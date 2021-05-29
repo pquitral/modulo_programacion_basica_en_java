@@ -1,0 +1,190 @@
+26-05-2021
+
+Crear tres clases con sus respectivos atributos, métodos y crear distintas instancias.
+
+
+package javap;
+	
+
+	public class Libro {
+	   // atributos
+	    String nombre;
+	    String autor;
+	    String genero; 
+	    String editorial;
+	     int numIdentificador;
+	     
+	    // Métodos
+	
+
+	}
+
+
+----------------------------------------
+
+
+
+	
+public enum TipoCuenta {
+	    
+	    C("corriente", 'C'), V("vista", 'V'), A("ahorro",'A');
+	    private String nombre;
+	    private char tipo;
+	    
+	    private TipoCuenta(String nombre, char tipo){
+	        this.nombre = nombre;
+	        this.tipo = tipo;
+	    }
+	    
+	    public String getNombre() {
+		return nombre;
+	    }
+	
+
+	    public char getTipo() {
+	        return tipo;
+	    }
+	    
+	}
+
+
+------------------------------------------------------------------------
+
+import java.util.Random;
+
+import java.util.Scanner;
+
+
+
+
+public class Juego {
+
+    
+
+    public void jugar(){
+
+        
+
+        Random random = new Random();
+
+        Scanner scanner = new Scanner(System.in);
+
+        int contador = 1;
+
+        
+
+        int numero = random.nextInt(29)+1;
+
+        
+
+        System.out.println("Ingresa un numero del 1 al 30 a ver si le aciertas");
+
+        int numeroUser = scanner.nextInt();
+
+        
+
+        while(numero!=numeroUser){
+
+            
+
+            if(numero> numeroUser){
+
+                System.out.println("Tu numero es menor");
+
+                contador++;
+
+            }
+
+            else if (numero< numeroUser){
+
+                System.out.println("Tu numero es mayor");
+
+                contador++;
+
+            }
+
+            
+
+            System.out.println("Ingresa otro :P");
+
+            numeroUser = scanner.nextInt();
+
+        }
+
+        
+
+        System.out.println("Has acertado, el numero era " + numero);
+
+        System.out.println("Necesitaste " + contador + " intentos ");
+
+        
+
+        
+
+    }
+
+    
+
+}
+
+----------------------------------------------------------------------------
+
+public class Usuario {
+
+	    
+
+	    String nombreUsuario;
+
+	    String contrasena;
+
+	    
+
+	    public void estableceNombre(String nombreUsuario){
+
+	        this.nombreUsuario = nombreUsuario;
+
+	    }
+
+	    
+
+	    public void estableceContrasena(String contrasena){
+
+	        this.contrasena = contrasena;
+
+	    }
+
+	    
+
+	    public String getUsuario(){
+
+	        
+
+	        return nombreUsuario;
+
+	    }
+
+	    
+
+	    public String getContrasena(){
+
+	        
+
+	        return contrasena;
+
+	    }
+
+	    
+
+	    public void mostrarUserYContrasena(){
+
+	        
+
+	        System.out.println("El usario " + nombreUsuario + " Tiene como contraseña: " + contrasena);
+
+	    }
+
+	    
+
+	}
+
+	
