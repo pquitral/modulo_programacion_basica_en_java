@@ -1,0 +1,224 @@
+package poo;
+import java.util.Scanner;
+
+
+public class Poo {
+
+    
+    public static void main(String[] args) {
+        // Programa para administrar una biblioteca.
+        
+       Scanner leer=new Scanner(System.in);
+       byte op;
+       int numUs;
+       String a;
+       
+        System.out.println("Bienvenido a Ratón de Biblioteca \n\nPara empezar seleccione una opción\n");
+        System.out.println("1.-\tCrear un nuevo usuario\n2.-\tSolicitar Préstamo\n3.-\tIngresar devolución\n4.-\tIngresar un nuevo texto\n5.-\tDar de baja un texto");
+        op=leer.nextByte();
+        
+        switch (op) {
+            case 1 -> { 
+                Usuario U1=new Usuario();
+                System.out.println("\nEstamos creando un nuevo usuario");
+                U1.listo();
+                U1.nombre= "Malolin Bombín";
+                U1.numUsuario= 123456;
+                System.out.println("Nombre Usuario: "+U1.nombre );
+                System.out.println("Numero Usuario: "+U1.numUsuario+"\n");
+                U1.guarde();
+            }
+                
+            case 2 -> {
+                Prestamo P1=new Prestamo();
+                System.out.println("Ingrese número de usuario");
+                P1.numUsuario=leer.nextInt();
+                P1.validacion();
+                System.out.println("Ingrese número identificador de objeto");
+                P1.prestamo();
+               
+            }
+                
+            case 3 -> {
+                Libro dev=new Libro();
+                System.out.println("Ingrese los datos requeridos");
+                dev.numIdentificador=999;
+                dev.devolucion();
+                
+            }
+                
+            case 4 -> { System.out.println("A seleccionado ingresar un nuevo libro \nIngrese los siguientes datos");
+               Libro L1=new Libro();
+               
+               L1.ingreseDatos("", "", "", "",0);
+               
+              
+               
+               
+            }   
+                
+            case 5 -> {
+                
+            }   
+                
+                
+        }
+     
+    }
+    
+}
+
+
+
+//Clase Usuario
+
+package poo;
+import java.util.Scanner; 
+
+public class Usuario {
+ Scanner leer=new Scanner (System.in);   
+
+//Atributos
+    
+    String nombre;
+    int numUsuario;
+    
+    //Métodos.
+    public Usuario(){}
+    
+    
+    public Usuario (String nombre, int numUsuario ){
+    
+        this.nombre=nombre;
+        this.numUsuario=numUsuario;
+       
+    }
+    public void listo(){
+        System.out.println("Usuario Creado con éxito ");
+    }
+    public void guarde(){
+        System.out.println("Conserve sus datos, serán requeridos para hacer uso de la biblioteca");
+    
+    }
+
+//Clase Libro
+
+package poo;
+
+import java.util.Scanner;
+
+public class Libro {
+    Scanner entra=new Scanner(System.in);
+    // atributos
+
+    String nombre;
+    String autor;
+    String genero;
+    String editorial;
+    int numIdentificador;
+
+    public void ingreseDatos(String nombre, String autor, String genero, String editorial, int num) {
+        System.out.println("Ingrese nombre de libro");
+        this.nombre =entra.nextLine();
+        System.out.println("Ingrese autor");
+        this.autor = entra.nextLine();
+        System.out.println("Ingrese género");
+        this.genero = entra.nextLine();
+        System.out.println("Ingrese editorial");
+        this.editorial = entra.nextLine();
+        System.out.println("Ingrese numIdentificador");
+        this.numIdentificador = entra.nextInt();
+        System.out.println("Para el nuevo ingreso se asignaron los siguiente datos "+this.nombre+"del autor"+this.autor+" de la editorial"+this.editorial);
+        System.out.println("Ingreso exitoso el libro tiene el siguiente identificador"+this.numIdentificador);
+    }
+
+    public void devolucion() {
+        boolean S=true;
+      
+        boolean id = true;
+        System.out.println("Ingrese número identificatorio");
+        nombre="Como ser un ninja";
+        if (id == true) {
+            System.out.println("Libro corresponde a : "+nombre);
+           
+            System.out.println("Libro reingresado con exito ");
+        } else {
+            System.out.println("Numero identificatorio no corresponde, verifique libro y/o identificador");
+        }
+
+    }
+
+   public void baja(){
+       System.out.println("Ingrese numIdentificatorio");
+       
+     
+       
+   }
+}
+
+
+//Clase Enciclopedia
+
+package poo;
+
+
+public class Enciclopedia {
+   String nombre;
+   String tipo; // Dinosaurios, idiomas, espacio, animales, historia, ciencias, cuerpo humano...., 
+   String idioma; // Esta en español , inglés, alemán....
+   int numIdentificador; //Número identificatorio, verifica disponibilidad. 
+   String ubicacion; //Espacio físico asignado, "donde buscarlo". 
+   
+   
+   
+   public void devolucion(){
+        boolean id=true;
+        System.out.println("Ingrese número identificatorio");
+        if(id==true){
+            System.out.println("Enciclopedia corresponde a " +tipo+nombre);
+            System.out.println("Enciclopedia reingresada ");
+        }else{
+            System.out.println("Número identificatorio no corresponde, verifique Enciclopedia y/o identificador");}
+   
+   
+   } 
+}
+
+//Clase Préstamo
+
+package poo;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Prestamo {
+    
+   int numPrestamo;
+   int fecha;
+   int tiempoPrestamo;
+   int numUsuario;
+ boolean validacion=true;
+
+
+public void validacion(){
+    
+    System.out.println("Estamos validando el usuario...");
+    if(this.validacion==true){
+         System.out.println("Usuario Corresponde ");
+    }else{
+        System.out.println("Usuario no Corresponde");
+    }
+    
+}
+ public void prestamo(){
+  Calendar fechaHoy=GregorianCalendar.getInstance();
+     
+     
+     this.numPrestamo=12;
+     this.fecha=fechaHoy.get(GregorianCalendar.YEAR);
+     this.tiempoPrestamo=15;
+     System.out.println("Se le otorga el libro en forma de préstamo\n"
+             + "con fecha "+fecha+ " por "+tiempoPrestamo+" días");
+     
+ }
+
+}
