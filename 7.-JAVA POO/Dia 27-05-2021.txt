@@ -1,182 +1,171 @@
-package pooclase27;
-import java.util.*;
+A partir de un proyecto, crear tres clases
 
-public class Pooclase27{
 
-    static Scanner leer = new Scanner(System.in);
-    
-    public static void main(String[] args) {
-        
-        
-        System.out.println("Menu banco, \n 1: Crear cuenta \n 2: Abonar en cuenta \n 3: Girar ");
-        int opcion = leer.nextInt();
-        switch(opcion){
-            case 1: crearCuenta(); break;
-            case 2: abonarCuenta(); break;
-            case 3: girarCuenta(args); break;
-            default: System.out.println("opción inexistente vuelva otro día"); break;
-        }
-        
-        
-    }
-    
-    public static void crearCuenta(){
-        
-        try {
+public static void main(String[] args) {
             
-            Cliente cli = new Cliente();
-            leer.nextLine();
-            System.out.println("Ingrese rut cliente ");
-            String rutCliente = leer.nextLine();
-            System.out.println("Ingrese nombre cliente ");
-            String nombreCliente = leer.nextLine();
-            System.out.println("Ingrese apellido cliente ");
-            String apellidoCliente = leer.nextLine();
-            System.out.println("Ingrese direccion cliente ");
-            String direccionCliente = leer.nextLine();
-            System.out.println("Ingrese email cliente ");
-            String emailCliente = leer.nextLine();
-            System.out.println("Ingrese telefono cliente formato +569 12345678");
-            String telefonoCliente = leer.nextLine();
-            System.out.println("Ingrese genero cliente (F o M)");
-            char generoCliente = leer.next().charAt(0);
-            System.out.println("Ingrese estado Civil cliente (S, C o V)");
-            char estadoCivilCliente = leer.next().charAt(0);
-            System.out.println("Ingrese edad cliente ");
-            int edadCliente = leer.nextInt();
-
-            boolean validador = validacionesCrearCuenta(rutCliente, emailCliente, telefonoCliente, generoCliente, estadoCivilCliente, edadCliente);
-
-            if(!validador) crearCuenta();
-            
-            
-            cli.setRut(rutCliente);
-            cli.setNombre(nombreCliente);
-            cli.setApellido1(apellidoCliente);
-            cli.setDireccion(direccionCliente);
-            cli.setEmail(emailCliente);
-            cli.setTelefono(telefonoCliente);
-            cli.setGenero(generoCliente);
-            cli.setEstadoCivil(estadoCivilCliente);
-            cli.setEdad(edadCliente);
-
-            System.out.println("ingrese tipo de cuenta: ");
-            for (TipoCuenta tc: TipoCuenta.values() ) {
-                System.out.print(tc.toString()+ ":" + tc.getNombre()+"\n");   } 
-            char tipoCuenta = leer.next().charAt(0);
-            System.out.println(tipoCuenta);
-            TipoCuenta tpoCta = asignarTipoCuenta(tipoCuenta);
-
-
-            long saldoInicial = 0;
-            if(tpoCta.getTipo() == 'A'){
-                System.out.println("ingrese saldo inicial");
-                saldoInicial = leer.nextLong();
-            }  
-            Ejecutivo ejecutivo = new Ejecutivo();
-            ejecutivo.setNombre("Pedro");
-            ejecutivo.setApellido1("Olivares");
-            CuentaBancaria ctaBancaria = new CuentaBancaria(tpoCta, saldoInicial, cli, ejecutivo);
-
-            System.out.println();
-            System.out.println("Cuenta creada exitosamente \n Cta Numero: " + ctaBancaria.numeroCuenta +"\n Tipo Cuenta: " + ctaBancaria.tipoCuenta + "\n Saldo: " + ctaBancaria.saldo+"\n" );
-            System.out.println("Cliente: \n " + ctaBancaria.cliente.getNombre() +  " " + ctaBancaria.cliente.getApellido1() + "\n");
-            System.out.println("Ejecutivo: \n " + ctaBancaria.ejecutivo.getNombre() +  " " + ctaBancaria.ejecutivo.getApellido1()+ "\n");
-            
-        } catch (InputMismatchException e) {
-            System.out.println("Ingrese dato correcto");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+       Scanner leer=new Scanner(System.in);
+       byte op;
+       int numUs;
+       String a;
+       
+        System.out.println("Bienvenido a Biblioteca Virtual \n\nPara empezar seleccione una opción\n");
+        System.out.println("1.-\tCrear un nuevo usuario\n2.-\tSolicitar Préstamo\n3.-\tIngresar devolución\n4.-\tIngresar un nuevo texto\n5.-\tDar de baja un texto");
+        op=leer.nextByte();
         
-        
-    }
-    
-    
-    public static void abonarCuenta() {
-        leer.nextLine();
-        System.out.println("Ingrese numero de cuenta ");
-        String cuenta = leer.nextLine();
-        System.out.println("Ingrese monto de abono ");
-        long abono = leer.nextLong();
-        CuentaBancaria cta = new CuentaBancaria();
-        cta.saldo = 30000;
-        long saldo = cta.abonar(cuenta, abono);
-        System.out.println("Su nuevo saldo es " + saldo);
-        
-    }
-    
-    public static void girarCuenta(String[] args) {
-        leer.nextLine();
-        System.out.println("Ingrese numero de cuenta ");
-        String cuenta = leer.nextLine();
-        System.out.println("Ingrese monto a girar ");
-        long giro = leer.nextLong();
-        CuentaBancaria cta = new CuentaBancaria();
-        cta.saldo = 30000;
-        long saldo = cta.girar(cuenta, giro);
-        if(saldo == cta.saldo){
-            System.out.println("Saldo no es suficiente: " + saldo + ", intente monto más bajo");
-            main(args);
-        }
-        else
-             System.out.println("Su nuevo saldo es " + saldo);
-        
-    }
-    
-    
-    private static TipoCuenta asignarTipoCuenta(char tipoSeleccionado){
-        TipoCuenta tpoCta = TipoCuenta.V;
-        switch(tipoSeleccionado) {
-            case 'A':
-                tpoCta = TipoCuenta.A;
-                break;
-            case 'V':
-                tpoCta = TipoCuenta.V;
-                break;
-            case 'C':
-                tpoCta = TipoCuenta.C;
-                break;
-            default:
-                System.out.printf("No existe tipo de cuenta \n");
-                break;
-        }
-        return tpoCta;
-                
-    }
-    
-    private static boolean validacionesCrearCuenta(String rutCliente, String emailCliente, String telefonoCliente, char generoCliente, char estadoCivilCliente, int edadCliente){
-        
-        boolean rutValido = Validacion.validarRut(rutCliente);
-        boolean emailValido = Validacion.validarEmail(emailCliente);
-        boolean telefonoValido = Validacion.validarTelefono(telefonoCliente);
-        boolean generoValido = Validacion.validarGenero(generoCliente);
-        boolean estadoValido = Validacion.validarEstadoCivil(estadoCivilCliente);
-        boolean edadValido = Validacion.validarEdad(edadCliente);
-        
-        Map<String, Boolean> map = new HashMap<>(); //uso de diamond operator
-        map.put("Rut", rutValido);
-        map.put("Email", emailValido);
-        map.put("Teléfono", telefonoValido);
-        map.put("Genero", generoValido);
-        map.put("Estado Civil", estadoValido);
-        map.put("Edad", edadValido);
-        
-        String mensaje = "";
-        boolean validador = true;
-        for (Map.Entry<String, Boolean> entry : map.entrySet()) {
-            final boolean valorActual = entry.getValue();
-            if (!valorActual){
-                mensaje= mensaje + entry.getKey()+",";
+        switch (op) {
+            case 1 -> { 
+                Usuario U1=new Usuario();
+                System.out.println("\nEstamos creando un nuevo usuario");
+                U1.listo();
+                U1.nombre= "Juan Perez";
+                U1.numUsuario= 1000;
+                System.out.println("Nombre Usuario: "+U1.nombre );
+                System.out.println("Numero Usuario: "+U1.numUsuario+"\n");
+                U1.guarde();
             }
-        }
-        if(!"".equals(mensaje)){
-            System.out.println(mensaje + " son inválidos ");
-            validador = false;
-        }
+                
+            case 2 -> {
+                Prestamo P1=new Prestamo();
+                System.out.println("Ingrese número de usuario");
+                P1.numUsuario=leer.nextInt();
+                P1.validacion();
+                System.out.println("Ingrese número identificador de objeto");
+                P1.prestamo();
                
-        return validador;
+            }
+                
+            case 3 -> {
+            }
+                
+            case 4 -> { System.out.println("A seleccionado ingresar un nuevo libro \nIngrese los siguientes datos");
+               Libro L1=new Libro();
+               L1.ingreseDatos();
+            }   
+                
+            case 5 -> {
+            }   
+                
+                
+        }
+     
+    }
+    
+}
+
+
+
+
+package Poo;
+import java.util.Scanner; 
+
+public class Usuario {
+ Scanner leer=new Scanner (System.in);   
+
+//Atributos
+    
+    String nombre;
+    int numUsuario;
+    
+    //Métodos.
+    public Usuario(){}
+    
+    
+    public Usuario ( ){
+    
+        this.nombre=nombre;
+        this.numUsuario=numUsuario;
        
     }
+    public void listo(){
+        System.out.println("Usuario Creado con éxito ");
+    }
+    public void guarde(){
+        System.out.println("Conserve sus datos, serán requeridos para hacer uso de la biblioteca");
     
+    }
+
+
+package poo;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Prestamo {
+    
+   int numPrestamo;
+   int fecha;
+   int tiempoPrestamo;
+   int numUsuario;
+ boolean validacion=true;
+
+
+public void validacion(){
+    
+    System.out.println("Estamos validando el usuario...");
+    if(this.validacion==true){
+         System.out.println("Usuario Corresponde ");
+    }else{
+        System.out.println("Usuario no Corresponde");
+    }
+    
+}
+ public void prestamo(){
+  Calendar fechaHoy=GregorianCalendar.getInstance();
+     
+     
+     this.numPrestamo=1;
+     this.fecha=fechaHoy.get(GregorianCalendar.YEAR);
+     this.tiempoPrestamo=10;
+     System.out.println("Se le otorga el libro en forma de préstamo\n"
+             + "con fecha "+fecha+ " por "+tiempoPrestamo+" días");
+     
+
+ 
+ }
+
+}
+
+
+package poo;
+import java.util.Scanner;
+
+
+public class Libro {
+   // atributos
+    String nombre;
+    String autor;
+    String genero; 
+    String editorial;
+     int numIdentificador;
+  
+   public void ingreseDatos(){
+       System.out.println("Ingrese nombre de libro");
+       this.nombre="JAVA para novatos";
+       this.autor="A.M.Vozmediano";
+       
+       
+    }   
+       
+       
+       
+       /*System.out.println("Ingrese autor del libro");
+       this.autor=("");
+       System.out.println("Ingrese género ");
+       this.genero=("");
+       System.out.println("Ingrese editorial");
+       this.editorial=("");*/
+       
+   
+    
+}
+
+
+package poo;
+
+
+public class Enciclopedia {
+    
+   String tipo; // Dinosaurios, idiomas, espacio, animales, historia, ciencias, cuerpo humano...., 
+   String idioma; // Esta en español , inglés, alemán....
+   int numIdentificador; //Número identificatorio, verifica disponibilidad. 
+   String ubicacion; //Espacio físico asignado, "donde buscarlo". 
 }
