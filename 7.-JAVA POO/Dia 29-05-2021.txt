@@ -1,87 +1,240 @@
+package 29-05-2021;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 
-public class Validacion {
-    
-    
-    
-    
-    public static boolean validarRut(String rut) {
+public class Poo {
 
-        boolean validacion = false;
-        try {
-            rut =  rut.toUpperCase();
-            rut = rut.replace(".", "");
-            rut = rut.replace("-", "");
-            int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
-
-            char dv = rut.charAt(rut.length() - 1);
-
-            int m = 0, s = 1;
-            for (; rutAux != 0; rutAux /= 10) {
-                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
-            }
-            if (dv == (char) (s != 0 ? s + 47 : 75)) {
-                validacion = true;
-            }
-
-        } catch (java.lang.NumberFormatException e) {
-
-        } catch (Exception e) {
-        }
-        return validacion;
-    }
     
-    public static boolean validarEmail(String email) {
- 
-        // Patrón para validar el email
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                                      + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"); 
-        Matcher mather = pattern.matcher(email);
-        boolean validacion = false;
-        if (mather.find() == true) {
-            validacion = true;
-        } 
-        return validacion;
-    }
-    
-    public static boolean validarTelefono(String telefono) {
- 
-        // Patrón para validar el email
-        Pattern pattern = Pattern.compile("^(\\+?56)?(\\s?)(0?9)(\\s?)[9876543]\\d{7}$"); 
-        Matcher mather = pattern.matcher(telefono);
-        boolean validacion = false;
-        if (mather.find() == true) {
-            validacion = true;
-        } 
-        return validacion;
-    }
-    
-    public static boolean validarGenero(char genero) {
- 
-        boolean validacion = false;
-        String generoString = String.valueOf(genero).toUpperCase();
-        if ("F".equals(generoString) || "M".equals(generoString)) {
-            validacion = true;
-        } 
-        return validacion;
-    }
-    
-    public static boolean validarEstadoCivil(char estado) {
- 
-        boolean validacion = false;
-        String estadoString = String.valueOf(estado).toUpperCase();
+    public static void main(String[] args) {
+        // Programa para administrar una biblioteca.
         
-        if ("S".equals(estadoString) || "C".equals(estadoString) || "V".equals(estadoString)) {
-            validacion = true;
-        } 
-        return validacion;
+       Scanner leer=new Scanner(System.in);
+       byte op;
+       
+        System.out.println("Bienvenido a Biblioteca Virtual \n\nPara empezar seleccione una opción\n");
+        System.out.println("1.-\tCrear un nuevo usuario\n2.-\tSolicitar Préstamo\n3.-\tIngresar devolución\n4.-\tIngresar un nuevo texto\n5.-\tDar de baja un texto");
+        op=leer.nextByte();
+        
+        switch (op) {
+            case 1 -> { 
+                Usuario U1=new Usuario();
+                System.out.println("\nEstamos creando un nuevo usuario");
+                U1.Usuario();
+                U1.listo();
+                U1.guarde();
+            }
+                
+            case 2 -> {
+                Prestamo P1=new Prestamo();
+                P1.validacion();
+                
+                P1.prestamo();
+               
+            }
+                
+            case 3 -> {
+                Libro dev=new Libro();
+                System.out.println("Ingrese los datos requeridos");
+                dev.numIdentificador=1000;
+                dev.devolucion();
+                
+            }
+                
+            case 4 -> { System.out.println("A seleccionado ingresar un nuevo libro \nIngrese los siguientes datos");
+               Libro L1=new Libro();
+               
+               L1.ingreseDatos("", "", "", "",0);
+            
+               
+            }   
+                
+            case 5 -> {
+                Libro L2=new Libro();
+                L2.baja();
+                break;
+                
+            }   
+                
+                
+        }
+     
     }
     
-    public static boolean validarEdad(int edad) {
- 
-        boolean validacion = false;
-        if (edad >=0 && edad <=65) {
-            validacion = true;
-        } 
-        return validacion;
+}
+
+package poo;
+import java.util.Scanner; 
+
+public class Usuario {
+ Scanner leer=new Scanner (System.in);   
+
+//Atributos
+    
+    String nombre;
+    int numUsuario;
+    
+    //Métodos.
+    public Usuario(){}
+    
+    
+    public void Usuario (){
+        System.out.println("Ingrese un nombre");
+        this.nombre=leer.nextLine();
+        System.out.println("Designe un numero de Usuario");
+        this.numUsuario=leer.nextInt();
+        System.out.println("Usuario creado " +this.nombre+" con el número de usuario "+this.numUsuario);
+       
     }
+    public void listo(){
+        System.out.println("Usuario Creado con exito ");
+    }
+    public void guarde(){
+        System.out.println("Conserve sus datos, serán requeridos para hacer uso de la biblioteca");
+    
+    }
+        
+   /*public Usuario(int numPrestamo, int faltas, String castigo) {
+    this.numPrestamo=numPrestamo;
+    this.faltas=faltas;
+    this.castigo=castigo;
+    
+    }
+    int numPrestamo;
+    int faltas; // Si se pasó los dias de devolución o en su efecto no devolvió un libro
+    String castigo;
+
+    } */    
+}
+
+
+package poo;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+
+public class Prestamo {
+    Scanner entra=new Scanner(System.in);
+   int numIdFormato; //código del formato (libro, revista, enciclopedia, etc
+   int numPrestUser;//número de préstamo que se ha otorgado al usuario
+   int fecha;
+   int tiempoPrestamo; //tiempo que se le asigna al préstamo
+   int numUsuario;
+ boolean validacion=true; //si corresponde a un usuario registrado 
+
+
+public void validacion(){
+    System.out.println("Ingrese número de Usuario");
+    this.numUsuario=entra.nextInt();
+    System.out.println("Estamos validando el usuario...");
+    if(this.validacion==true){
+         System.out.println("Usuario Corresponde ");
+    }else{
+        System.out.println("Usuario no Corresponde");
+    }
+    
+}
+ public void prestamo(){
+  Calendar fechaHoy=GregorianCalendar.getInstance();
+     
+     System.out.println("Ingrese número identificatorio de formato ");
+     this.numIdFormato=entra.nextInt();
+     this.numPrestUser=1;
+     this.fecha=fechaHoy.get(GregorianCalendar.YEAR);
+     this.tiempoPrestamo=10;
+     System.out.println("Se le otorga el libro en forma de préstamo\n"
+             + "con fecha "+fecha+ " por "+tiempoPrestamo+" días");
+     
+
+ 
+ }
+
+}
+
+
+package poo;
+
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+public class Libro {
+    Scanner entra=new Scanner(System.in);
+    // atributos
+
+    String nombre;
+    String autor;
+    String genero;
+    String editorial;
+    int numIdentificador;
+
+    public void ingreseDatos(String nombre, String autor, String genero, String editorial, int num) {
+        System.out.println("Ingrese nombre de libro");
+        this.nombre =entra.nextLine();
+        System.out.println("Ingrese autor");
+        this.autor = entra.nextLine();;
+        System.out.println("Ingrese género");
+        this.genero = entra.nextLine();;
+        System.out.println("Ingrese editorial");
+        this.editorial = entra.nextLine();
+        System.out.println("Ingrese numIdentificador");
+        this.numIdentificador = entra.nextInt();
+        System.out.println("Para el nuevo ingreso se asignaron los siguiente datos "+this.nombre+" del autor "+this.autor+" de la editorial "+this.editorial);
+        System.out.println("Ingreso exitoso el libro tiene el siguiente identificador "+this.numIdentificador);
+    }
+
+    public void devolucion() {
+        boolean S=true;
+      
+        boolean id = true;
+        System.out.println("Ingrese número identificatorio");
+        this.numIdentificador=entra.nextInt();
+        this.nombre="El mundo de Boby";
+        if (id == true) {
+            System.out.println("Libro corresponde a : " +this.nombre ); 
+           
+            System.out.println("Libro reingresado con exito ");
+        } else {
+            System.out.println("Numero identificatorio no corresponde, verifique libro y/o identificador");
+        }
+
+    }
+
+   public void baja(){
+    
+       System.out.println("Ingrese numIdentificatorio");
+       this.numIdentificador=entra.nextInt();
+       this.nombre="Manual para lavarse la carita como Pin Pon";
+       System.out.println("Este número corresponde a : " +this.nombre+ "");
+      String comentarios=JOptionPane.showInputDialog("Ingrese comentario breve sobre el porqué de la baja");
+       JOptionPane.showMessageDialog(null,"Se da de baja por las siguientes razones: \n"+comentarios); 
+       System.out.println("Se ha dado de baja el tomo: " +this.nombre+ " con el número identificatorio " +this.numIdentificador);
+      
+       
+   }
+}
+
+
+package poo;
+
+
+public class Enciclopedia {
+   String nombre;
+   String tipo; // Dinosaurios, idiomas, espacio, animales, historia, ciencias, cuerpo humano...., 
+   String idioma; // Esta en español , inglés, alemán....
+   int numIdentificador; //Número identificatorio, verifica disponibilidad. 
+   String ubicacion; //Espacio físico asignado, "donde buscarlo". 
+   
+   
+   
+   public void devolucion(){
+        boolean id=true;
+        System.out.println("Ingrese número identificatorio");
+        if(id==true){
+            System.out.println("Enciclopedia corresponde a " +tipo+nombre);
+            System.out.println("Enciclopedia reingresada ");
+        }else{
+            System.out.println("Número identificatorio no corresponde, verifique Enciclopedia y/o identificador");}
+   
+   
+   } 
 }
