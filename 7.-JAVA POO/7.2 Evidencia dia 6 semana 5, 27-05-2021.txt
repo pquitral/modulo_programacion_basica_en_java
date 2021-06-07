@@ -1,0 +1,171 @@
+A partir de un proyecto, crear tres clases
+
+
+public static void main(String[] args) {
+            
+       Scanner leer=new Scanner(System.in);
+       byte op;
+       int numUs;
+       String a;
+       
+        System.out.println("Bienvenido a Biblioteca Virtual \n\nPara empezar seleccione una opción\n");
+        System.out.println("1.-\tCrear un nuevo usuario\n2.-\tSolicitar Préstamo\n3.-\tIngresar devolución\n4.-\tIngresar un nuevo texto\n5.-\tDar de baja un texto");
+        op=leer.nextByte();
+        
+        switch (op) {
+            case 1 -> { 
+                Usuario U1=new Usuario();
+                System.out.println("\nEstamos creando un nuevo usuario");
+                U1.listo();
+                U1.nombre= "Juan Perez";
+                U1.numUsuario= 1000;
+                System.out.println("Nombre Usuario: "+U1.nombre );
+                System.out.println("Numero Usuario: "+U1.numUsuario+"\n");
+                U1.guarde();
+            }
+                
+            case 2 -> {
+                Prestamo P1=new Prestamo();
+                System.out.println("Ingrese número de usuario");
+                P1.numUsuario=leer.nextInt();
+                P1.validacion();
+                System.out.println("Ingrese número identificador de objeto");
+                P1.prestamo();
+               
+            }
+                
+            case 3 -> {
+            }
+                
+            case 4 -> { System.out.println("A seleccionado ingresar un nuevo libro \nIngrese los siguientes datos");
+               Libro L1=new Libro();
+               L1.ingreseDatos();
+            }   
+                
+            case 5 -> {
+            }   
+                
+                
+        }
+     
+    }
+    
+}
+
+
+
+
+package Poo;
+import java.util.Scanner; 
+
+public class Usuario {
+ Scanner leer=new Scanner (System.in);   
+
+//Atributos
+    
+    String nombre;
+    int numUsuario;
+    
+    //Métodos.
+    public Usuario(){}
+    
+    
+    public Usuario ( ){
+    
+        this.nombre=nombre;
+        this.numUsuario=numUsuario;
+       
+    }
+    public void listo(){
+        System.out.println("Usuario Creado con éxito ");
+    }
+    public void guarde(){
+        System.out.println("Conserve sus datos, serán requeridos para hacer uso de la biblioteca");
+    
+    }
+
+
+package poo;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Prestamo {
+    
+   int numPrestamo;
+   int fecha;
+   int tiempoPrestamo;
+   int numUsuario;
+ boolean validacion=true;
+
+
+public void validacion(){
+    
+    System.out.println("Estamos validando el usuario...");
+    if(this.validacion==true){
+         System.out.println("Usuario Corresponde ");
+    }else{
+        System.out.println("Usuario no Corresponde");
+    }
+    
+}
+ public void prestamo(){
+  Calendar fechaHoy=GregorianCalendar.getInstance();
+     
+     
+     this.numPrestamo=1;
+     this.fecha=fechaHoy.get(GregorianCalendar.YEAR);
+     this.tiempoPrestamo=10;
+     System.out.println("Se le otorga el libro en forma de préstamo\n"
+             + "con fecha "+fecha+ " por "+tiempoPrestamo+" días");
+     
+
+ 
+ }
+
+}
+
+
+package poo;
+import java.util.Scanner;
+
+
+public class Libro {
+   // atributos
+    String nombre;
+    String autor;
+    String genero; 
+    String editorial;
+     int numIdentificador;
+  
+   public void ingreseDatos(){
+       System.out.println("Ingrese nombre de libro");
+       this.nombre="JAVA para novatos";
+       this.autor="A.M.Vozmediano";
+       
+       
+    }   
+       
+       
+       
+       /*System.out.println("Ingrese autor del libro");
+       this.autor=("");
+       System.out.println("Ingrese género ");
+       this.genero=("");
+       System.out.println("Ingrese editorial");
+       this.editorial=("");*/
+       
+   
+    
+}
+
+
+package poo;
+
+
+public class Enciclopedia {
+    
+   String tipo; // Dinosaurios, idiomas, espacio, animales, historia, ciencias, cuerpo humano...., 
+   String idioma; // Esta en español , inglés, alemán....
+   int numIdentificador; //Número identificatorio, verifica disponibilidad. 
+   String ubicacion; //Espacio físico asignado, "donde buscarlo". 
+}
