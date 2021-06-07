@@ -1,0 +1,163 @@
+Evidencia DÍA 6 SEMANA 6 
+AVANCE día jueves 3 de junio.
+
+Crear una clase Cuenta para representar una cuenta bancaria. Los datos de la cuenta son: nombre del cliente (String), número de cuenta (String) y saldo (double). Con los siguientes métodos:
+-Constructor por defecto.
+-Constructor con todos los parámetros.
+-Métodos setters/getters para asignar y obtener los datos de la cuenta.
+-Métodos depósito y giro (debe comprobar que hay saldo suficiente).
+-Método transferencia que permita pasar dinero de una cuenta a otra siempre que en la cuenta de origen haya dinero suficiente para hacerla.
+
+package jueves3junio;
+
+import javax.swing.JOptionPane;
+
+
+public class Jueves3Junio {
+
+    //En construccion
+    public static void main(String[] args) {
+        //Cuenta Bancaria
+        
+        Cuenta C1=new Cuenta();
+        Cuenta C2=new Cuenta();
+        Cuenta C3=new Cuenta();
+        Cuenta C4=new Cuenta();
+        
+        C1.setNombreCliente();
+        C1.setNumeroCuenta();
+        C1.setSaldo();
+        C2.datosCliente("Juan Perez", "112233445566",5000.00);
+        C3.datosCliente("Armando Casas", "223344556611", 5000.00);
+        C4.datosCliente("Juan Gonzalez","334455661122", 5000.00);
+        
+          int op=Integer.parseInt(JOptionPane.showInputDialog("Bienvenido a tu cuenta bancaria\n Ingresa a una opción \n"
+                 + "1\tConsulta de Saldo\n2\tTransferencia\n3\tDeposito\n4\tgiro"));
+    switch (op){
+    
+        case 1: C1.tuSaldo();
+            break;
+    
+        case 2:C1.transferencia();
+            break;
+            
+        case 3: C1.deposito();
+        
+            break;
+            
+        case 4: C1.giro();
+            break;
+    
+    
+    }
+      
+        
+    }
+    
+}
+
+package jueves3junio;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+public class Cuenta {
+private    String nombreCliente, numeroCuenta;
+    double saldo;
+    
+    
+    public Cuenta (){}
+    public Cuenta(String nombreCliente, String numeroCuenta, double saldo){}
+    
+    
+    public void  setNumeroCuenta (){
+    this.numeroCuenta=(JOptionPane.showInputDialog("Ingrese el número de cuenta "));
+    }
+    public String getNumeroCuenta (){
+        return numeroCuenta;
+    }
+    
+    public void datosCliente(String nombreCliente, String numeroCuenta, double saldo){
+    this.nombreCliente=(JOptionPane.showInputDialog("Ingrese el nombre del cliente "));
+    }
+    
+    public void setNombreCliente(){
+    this.nombreCliente=(JOptionPane.showInputDialog("Ingrese el nombre del cliente "));
+    }
+    
+    
+    public String getNombreCliente (){
+        return nombreCliente;
+    }
+    
+    public void setSaldo (){
+    this.saldo=saldo;
+    
+    }
+    
+    public double getSaldo(){
+        return saldo;
+    }
+    
+   
+    //Métodos
+    
+    
+    
+   
+    public void deposito(){
+        int monto;
+       monto=Integer.parseInt(JOptionPane.showInputDialog("Ingrese monto a depositar"));
+       saldo=saldo+monto;
+       JOptionPane.showMessageDialog(null,"Su saldo actual es: "+saldo);
+    }
+    
+    
+    
+    public void transferencia(){
+    int trans;
+    String cuentaDest= JOptionPane.showInputDialog("Ingrese una cuenta de destino ");
+    
+    JOptionPane.showInputDialog("Los datos ingresados corresponden a  "+cuentaDest);
+    
+    
+    trans=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el monto de la transferencia "));
+    if(trans>saldo){
+         JOptionPane.showMessageDialog(null,"No es posible \nEl monto de la transferencia supera su saldo, su saldo actual es "+saldo);
+    }else{
+        saldo=saldo-trans;
+        JOptionPane.showMessageDialog(null,"Su saldo actual es: "+saldo);
+    }
+    
+    }
+    
+    public void giro (){
+     int giro;
+     giro=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el monto del giro "));
+     
+     if(giro>saldo){
+         JOptionPane.showMessageDialog(null,"El monto ingresado supera su saldo, su saldo actual es "+saldo);
+     }else{
+     saldo=saldo-giro;
+     JOptionPane.showMessageDialog(null,"Su saldo actual es: "+saldo);
+     }
+    }
+    
+    public void tuSaldo(){
+        JOptionPane.showMessageDialog(null,"Su saldo actual es: "+saldo);
+        
+    }
+  
+    private void cuentas(){
+     String cuentas[];
+    cuentas=new String [4];
+    cuentas[0]="Juan Perez";
+    cuentas[1]="Armando Casas";
+    cuentas[2]="Marta Martinez";
+    cuentas[3]="Juan Gonzalez";
+   
+    
+    
+    }
+    
+    
+}
