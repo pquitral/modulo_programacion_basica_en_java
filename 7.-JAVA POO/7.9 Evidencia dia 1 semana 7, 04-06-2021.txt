@@ -1,0 +1,181 @@
+Evidencia dia 1 semana 7
+
+Crear una clase Cuenta para representar una cuenta bancaria. Los datos de la cuenta son: nombre del cliente(String), número de cuenta (String) y saldo (double). Con los siguientes métodos:
+- Constructor por defecto Constructor con todos los parámetros.
+- Métodos setters/getters para asignar y obtener los datos de la cuenta
+- Métodos depósito y giro (debe comprobar que hay saldo suficiente).
+- Método transferencia que permita pasar dinero de una cuenta a otra siempre que en la cuenta de origen haya dinero suficiente para hacerla.
+
+package jueves3junio;
+
+import javax.swing.JOptionPane;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+public class Jueves3Junio {
+
+    //Terminado implementando Arraylist para la creación de nuevas clases (Cuentas)
+    public static void main(String[] args) {
+        //Cuenta Bancaria
+         ArrayList <Cuenta> listaCuenta=new ArrayList <Cuenta>();
+        Scanner leer=new Scanner(System.in);
+        String nombre, cuenta;
+        double saldo;
+        char respuesta;//respuesta de ingreso clientes
+        int res;// respuesta del menu del Banco
+        int seleccion, destino;//selección de la cuenta y destino de la transferencia 
+    do{
+        System.out.println("Ingrese Nombre Cliente");
+        nombre=leer.next();
+        System.out.println("Ingrese numero de cuenta ");
+        cuenta=leer.next();
+        System.out.println("Ingrese saldo");
+        saldo=leer.nextDouble();
+        
+        listaCuenta.add(new Cuenta(nombre, cuenta, saldo));
+       System.out.println("Decea agregar un nuevo cliente"); 
+         respuesta=leer.next().charAt(0);
+    }while(respuesta=='S'||respuesta=='s');  
+        
+    do{
+        System.out.println("==== Capsula Corp Bank ===");
+        System.out.println("Ingresa a tu cuenta");
+       
+        for(int i = 0; i < listaCuenta.size(); i++){
+                    System.out.println(i + ".- " + listaCuenta.get(i).getnombreCliente());
+                }
+                seleccion=leer.nextInt();
+        System.out.println("Bienvenido  "+ listaCuenta.get(seleccion).getnombreCliente());
+        System.out.println("Que accion deseas realizar?\n1.-\tConsulta de Saldo\n2.-\tDeposito\n3.-\tGiro\n4.-\tTransferencia\n5.-\tSalir ");  
+         res=leer.nextInt();
+        
+       switch (res){
+           case 1:// Consulta de saldo
+                     System.out.println("Su saldo es "+listaCuenta.get(seleccion).getsaldo()); //Esta operación pudo ser accesada gracias a la guía de Claudio Blanco.
+               break;
+           case 2://Deposito
+               listaCuenta.get(seleccion).deposito(0);
+               break;
+           case 3://Realizar Giro
+               listaCuenta.get(seleccion).giro(0);
+               break;
+           case 4://transferencia
+               System.out.println("Seleccione cuenta de destino ");
+                for(int i=0; i< listaCuenta.size(); i++){
+                    System.out.println(i+".-"+listaCuenta.get(i).getnombreCliente());
+                }
+                 destino=leer.nextInt();
+                 System.out.println("Ingrese monto");
+                 double  monto=leer.nextDouble();
+                listaCuenta.get(seleccion).transferencia(monto);
+                listaCuenta.get(destino).deposito(monto);
+                    
+               break;
+           case 5://Salir
+               System.out.println("Gracias por preferirnos ");
+               break; 
+       
+           default:
+               System.out.println("La opción ingresada no es válida");
+               break;
+       
+       } 
+        
+      }while(5!=res);   
+        
+        System.out.println("==== Capsula Corp Bank ===");
+         
+    
+    
+        
+    }  
+}
+
+
+package jueves3junio;
+import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+public class Cuenta {
+private    String nombreCliente, numeroCuenta;
+    double saldo;
+    Scanner leer=new Scanner(System.in);
+    ArrayList <String> listaNombre=new ArrayList <String>();
+    
+//Constructor con parámetros asignados
+    public Cuenta (){
+        this.nombreCliente="Pepe Grillo";
+        this.numeroCuenta="9999999";
+        this.saldo=0;
+    }
+    
+//Constructor por designar
+    public Cuenta(String nombreCliente, String numeroCuenta, double saldo){
+        this.nombreCliente=nombreCliente;
+        this.numeroCuenta=numeroCuenta;
+        this.saldo=saldo;
+    }
+    // Métodos Setter y Getters
+    
+     public void setnombreCliente(String nombreCliente){
+    this.nombreCliente=nombreCliente;
+    }
+    public String getnombreCliente (){
+        return nombreCliente;
+    }
+    
+    public void  setnumeroCuenta (String numeroCuenta){
+    this.numeroCuenta=numeroCuenta;
+    }   
+    public String getnumeroCuenta (){
+        return numeroCuenta;
+    }
+    
+    public void setsaldo (double saldo){
+    this.saldo=saldo;
+    }
+    public double getsaldo(){
+        return saldo;
+    }
+    
+   
+    //Métodos de la Clase Cuenta
+    
+    public void deposito(double monto){
+       
+        System.out.println("Ingrese monto a depositar");
+        monto=leer.nextDouble();
+       saldo=saldo+monto;
+    }
+    
+    public void transferencia(double monto){
+  
+    if(monto>saldo){
+        System.out.println("Su saldo es insuficiente para realizar la transferencia \n su saldo actual es "+ saldo);
+        }else{
+        saldo=saldo-monto;
+ 
+    }
+    
+    }
+    
+    public void giro ( double monto){
+        System.out.println("Ingrese monto a girar");
+        monto=leer.nextDouble();
+        if(monto >saldo){
+            System.out.println("El monto supera su saldo\n su saldo actual es  "+saldo);
+     }else{
+     saldo=saldo-monto;
+            System.out.println("Su saldo actual es " +saldo);
+     }
+    }
+    
+    public void tuSaldo(double saldo){
+        JOptionPane.showMessageDialog(null,"Su saldo actual es: "+saldo);
+        
+    
+    }
+    
+    
+}
