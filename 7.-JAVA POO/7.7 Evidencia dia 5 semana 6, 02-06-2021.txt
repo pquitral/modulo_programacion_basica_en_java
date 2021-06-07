@@ -1,0 +1,195 @@
+Evidencia dia 5 semana 6, 02-06-2021
+
+Crear una clase Fecha. La clase tendrá tres atributos privados día, mes, y año de tipo int. La clase contendrá los siguientes métodos: 
+- Constructor por defecto. Constructor con tres parámetros para crear objetos con valores iniciales. 
+- Métodos set y get para asignar y obtener los valores de los atributos de la clase.
+- Método fechaCorrecta () que comprueba si la fecha es correcta.
+
+Devuelve un valor de tipo boolean indicando si la fecha es correcta o no. 
+
+- Método diaSiguiente() que cambia la fecha actual por la del día siguiente.
+
+El objeto de la clase Fecha al que se le aplique este método deberá quedar siempre en un estado consistente, es decir, la nueva fecha deberá ser correcta.
+
+Escribe un programa para probar la clase Fecha. El método diaSiguiente() pruébalo dentro de un bucle que imprima la fecha durante cada iteración del bucle.
+
+
+package miercoles2junio;
+
+public class Miercoles2Junio {
+
+    
+    public static void main(String[] args) {
+        // Clase fecha Java
+        
+        Fecha fecha1=new Fecha();
+        
+        fecha1.setAño();
+        fecha1.setMes();
+        fecha1.setDia();
+      
+        fecha1.fechaPuesta();
+        fecha1.fechaCorrecta();
+        fecha1.diaSiguiente();
+        
+    }
+    
+}
+
+package miercoles2junio;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Fecha {
+    Scanner entra=new Scanner(System.in);
+    
+    private int Dia, Mes, Año;
+    public void Fecha( int Dia, int Mes, int Año){}
+    int diaHoy,mesHoy,añoHoy;
+    Calendar fechaHoy=new GregorianCalendar();
+ 
+    public void setDia(){
+    
+         
+    if(Mes==4||Mes==6||Mes==9||Mes==11){
+        do{
+            this.Dia=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día "));
+                if(Dia>30||Dia<0){
+                JOptionPane.showMessageDialog(null,"El número del día ingresado no es correcto, escoja un número entre 1 y 30 ");
+                }
+            }while(Dia>30||Dia<0);
+    }else if (Mes==1||Mes==3||Mes==5||Mes==7||Mes==8 || Mes==10||Mes==12) {
+        do{
+            this.Dia=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día "));
+                if(Dia>31||Dia<0){
+                JOptionPane.showMessageDialog(null,"El número del día ingresado no es correcto, escoja un número entre 1 y 31 ");
+                }
+            }while(Dia>31||Dia<0);
+    }else if(Mes==2){
+            if((Año%4==0 &&Año%100!=0)|| (Año%100==0&&Año%400==0)){
+               do{
+            this.Dia=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día "));
+                if(Dia>29||Dia<0){
+                JOptionPane.showMessageDialog(null,"El número del día ingresado no es correcto, escoja un número entre 1 y 29 ");
+                }
+            }while(Dia>29||Dia<0); 
+            }else{
+                do{
+            this.Dia=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el día "));
+                if(Dia>28||Dia<0){
+                JOptionPane.showMessageDialog(null,"El número del día ingresado no es correcto, escoja un número entre 1 y 28 ");
+                }
+            }while(Dia>28||Dia<0);
+           
+            }
+    
+    }
+    }
+    
+    public int getDia(){
+        return Dia;
+    }
+
+    public void setMes(){
+    do {
+        this.Mes=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el Mes "));
+        if(Mes>12||Mes<0)
+            JOptionPane.showMessageDialog(null,"El número del Mes ingresado no es correcto, escoja un número entre 1 y 12 ");
+         }while (Mes>12||Mes<0);
+    }
+
+    public int getMes(){
+        return Mes;
+    }
+    public void setAño(){
+       
+        this.Año=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el Año "));
+        if ((Año%4==0 &&Año%100!=0)|| (Año%100==0&&Año%400==0)){
+        JOptionPane.showMessageDialog(null,"El año ingresado es Bisiesto!"); 
+        }
+    }
+
+    public int getAño(){
+        return Año;
+    }
+    public void fechaPuesta(){
+        JOptionPane.showMessageDialog(null,"La fecha ingresada es: "+ Dia + "/" + Mes + "/"+ Año);
+    }
+    public void fechaCorrecta(){
+    
+       this.fechaHoy=Calendar.getInstance();
+         
+        this.diaHoy= fechaHoy.get (Calendar.DATE);
+        this.mesHoy=fechaHoy.get(Calendar.MONTH)+1;
+        this.añoHoy=fechaHoy.get(Calendar.YEAR);
+     
+       JOptionPane.showMessageDialog(null,"La fecha de hoy es "+diaHoy+"/"+mesHoy+"/"+añoHoy);
+     
+    }
+    public void diaSiguiente(){
+     int calc;
+     int op;
+     
+    op=Integer.parseInt(JOptionPane.showInputDialog("Que fecha quieres ocupar, la ingresada por ti op (1) o la del día de Hoy? op (2)"));
+     
+    switch (op){
+    
+        case 1: 
+                      calc=Integer.parseInt(JOptionPane.showInputDialog("Cuantos Dias más adelante quieres ver?"));
+                            for(int i=1; i<=calc; i++){
+                                
+                            if(Mes==4||Mes==6||Mes==9||Mes==11){
+                                Dia=Dia+1;
+                                if(Dia>30){
+                                Dia=1 ; Mes=Mes+1;}
+                            }  
+                            if (Mes==1||Mes==3||Mes==5||Mes==7||Mes==8 || Mes==10||Mes==12) {
+                                 Dia=Dia+1;
+                                if(Dia>31){
+                                Dia=1 ; Mes=Mes+1;}
+                            }    
+                            if(Mes==2){
+                                if((Año%4==0 &&Año%100!=0)|| (Año%100==0&&Año%400==0)){
+                                Dia=Dia+1;
+                                    if(Dia>29){
+                                        Dia=1 ; Mes=Mes+1;
+                                                }
+                                }else{
+                                    Dia=Dia+1;
+                                     if(Dia>28){
+                                        Dia=1 ; Mes=Mes+1;    
+                                                }
+                                }
+                            }    
+                                    if(Mes>12){
+                                     Mes=1; Año=Año+1;
+                                }
+                              // JOptionPane.showMessageDialog(null,""+Dia+"/"+Mes+"/"+Año);
+                                System.out.println(""+Dia+"/"+Mes+"/"+Año);
+                                }
+        break;
+        
+        case 2: 
+                calc=Integer.parseInt(JOptionPane.showInputDialog("Cuantos Dias más adelante quieres ver?"));
+        
+                            for(int i=1; i<=calc; i++){
+                               
+                           fechaHoy.add(Calendar.DAY_OF_MONTH, +i);
+                           diaHoy=diaHoy+1;
+                           
+                                System.out.println(""+diaHoy+ "/" +mesHoy+ "/" +añoHoy);
+                                }
+        break;
+        
+        
+     
+        }
+        
+        
+       
+    
+    } 
+    
+}
