@@ -1,0 +1,81 @@
+Evidencia dia 4 semana 6, clase 01-04-2021
+
+Crea una clase llamada Contador que contenga un único atributo entero llamado cont. La clase tendrá los siguientes constructores: Constructor por defecto, Constructor con parámetros para inicializar el contador con un valor no negativo. Si el valor inicial que se recibe es negativo el contador tomará el valor cero como valor inicial. Además de los métodos getter y setter, la clase contendrá los métodos:
+	-Incrementar: incrementa el contador en una unidad;
+	-decrementar: decrementa el valor en una unidad.
+	El contador nunca podrá tener un valor negativo. Si al decrementar se alcanza un valor negativo el contador toma el valor cero. Una vez creada la clase escribe un método main para probar la clase.
+  
+
+package martes1junio;
+
+import java.util.Scanner;
+public class Martes1Junio {
+
+   
+    public static void main(String[] args) {
+        //Clase cont
+    String op;
+        op="S";    
+        Scanner leer=new Scanner (System.in);
+         Contador Cont1=new Contador(0);
+          int num;
+    do{     System.out.println("Ingrese un numero");
+         num=leer.nextInt();
+          if(num%2==0){
+              Cont1.incrementar();
+          }else{
+          Cont1.decrementar();
+          }
+        System.out.println("¿Quieres continuar? S/N");
+        op=leer.next();
+    }while ("S".equals(op)); 
+    
+        Cont1.muestraCont();
+        
+    }
+    
+}
+
+package martes1junio;
+import java.util.Scanner;
+
+
+
+
+public class Contador {
+    
+Scanner entra=new Scanner(System.in);
+private int cont;
+    
+
+public Contador(int cont){
+    this.cont=cont;
+}
+
+public void setCont(int cont){
+   this.cont=cont;
+     if(cont<0){
+            cont=0;}
+}
+    
+public int getCont(){
+    return cont;
+}    
+    
+    
+  public void incrementar(){
+      this.cont=cont+1;
+      System.out.println(""+cont);
+      
+  }  
+  public void decrementar(){
+      this.cont=cont-1;
+    if(cont<0){
+       cont=0; }
+      System.out.println(""+cont);
+  } 
+  
+  public void muestraCont(){
+      System.out.println("El contador queda en " +cont);
+  }
+}
