@@ -1,0 +1,402 @@
+Evidencia dia 2 semana 7, 08-06-2021
+
+Continuidad cn ejercicio dia anterior
+
+//Creacion de arrays, clases y metodos
+
+package Herencia;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Herencia {
+
+   
+    public static void main(String[] args) {
+        // Clase Padre e hijo
+    Scanner leer=new Scanner(System.in);    
+    char resp1, resp2, resp3; 
+    int OP;
+       Electrodomestico EL=new Electrodomestico();
+        Lavadora L1=new Lavadora();//creación de clase lavadora
+        ReproductorMusica Marshal = new ReproductorMusica ();
+        Televisor tele = new Televisor();//creación de clase 
+     ArrayList <Lavadora> EntraLav=new ArrayList <>();
+     ArrayList <ReproductorMusica> EntraMusic=new ArrayList <>();
+     ArrayList <Televisor> Entratele=new ArrayList <>(); 
+     
+        System.out.println("\t\t===Menú para Ingresar nuevos Electrodomesticos===");
+        System.out.println("Desea ingresar alguno? S/N, si su respuesta es no, se mostraran los predeterminados");
+        resp3=leer.next().charAt(0);
+            if(resp3 =='S'||resp3=='s'){// Si la respuesta es s en mayuscula o minuscula se procede...
+                System.out.println("\t\t*** Que desea Ingresar *** \nOP:1 Lavadora, \tOP:2 Reproductor de Música \tOP:3 Televisor ");
+                OP=leer.nextInt();
+            switch (OP){
+                case 1: 
+                          
+                        System.out.println("Menú de Ingreso para Lavadora");
+            do{//ejecuta el menú una vez 
+                        System.out.println("Ingrese carga (Kilos)");
+                        int   carga=leer.nextInt();
+                        System.out.println("Ingrese el tipo de Carga (frontal o superior) ");
+                        String   tipoCarga=leer.next();
+                        System.out.println("Ingrese control de mando (manual o automatica");
+                        String    controlDeMando =leer.next();
+                        System.out.println("Ingrese voltaje");
+                        int    voltaje =leer.nextInt();
+                        System.out.println("Ingrese Clasificación Energética");
+                        String    ClasificacionEnergetica =leer.next();
+                        System.out.println("Ingrese Marca");
+                        String    marca =leer.next();
+                        System.out.println("Ingrese Gama");
+                        String   gama=leer.next();
+                        System.out.println("Ingrese color");
+                        String    color =leer.next();
+                        System.out.println("Ingrese Modelo");
+                        String   modelo =leer.next();
+                          
+                        EntraLav.add(new Lavadora(carga, tipoCarga, controlDeMando,voltaje,ClasificacionEnergetica,marca,gama,color,modelo));//crea una clase lavadora y se guarda en el arrays
+                        System.out.println("Decea agregar una nueva Lavadora?"); 
+                        resp1=leer.next().charAt(0);//guarda el valor de la respuesta en este caso un caracter (charAt) en la posición 0
+            }while(resp1=='S'||resp1=='s'); //compara la respuesta y es verdadera en mayuscula o minuscula 
+                        System.out.println("Desea ver una lista de las Lavadoras ingresadas a Stock? S/N"); 
+                        resp2=leer.next().charAt(0);//guarda el valor de la respuesta en este caso un caracter (charAt) en la posición 0
+                        if(resp2=='S'||resp2=='s'){//compara la respuesta y es verdadera en mayuscula o minuscula 
+                    System.out.println("Listado de Lavadoras en Stock");
+                    for(int i = 0; i < EntraLav.size(); i++){//muestra la lista de las lavadoras 
+                    System.out.println(i + ".- \tLavadora Modelo:" + EntraLav.get(i).getmodelo());//imprimo el mensaje y llamo al atributo modelo de la clase electrodomestico
+                }
+                            }
+                        break;
+                        
+                case 2:
+                        System.out.println("Menú de Ingreso para Reproductor de música");
+            do{
+                        System.out.println("Ingrese Potencia (Watts");
+                        String Potencia=leer.next();
+                        System.out.println("Ingrese las prestaciones (bluetooth, karaoke...) ");
+                        String prestaciones=leer.next();
+                        System.out.println("Ingrese cantidad de parlantes");
+                        int cantidadParlantes =leer.nextInt();
+                        System.out.println("Ingrese voltaje");
+                        int voltaje =leer.nextInt();
+                        System.out.println("Ingrese Clasificación Energética");
+                        String ClasificacionEnergetica =leer.next();
+                        System.out.println("Ingrese Marca");
+                        String marca =leer.next();
+                        System.out.println("Ingrese Gama");
+                        String gama=leer.next();
+                        System.out.println("Ingrese color");
+                        String color =leer.next();
+                        System.out.println("Ingrese Modelo");
+                        String modelo =leer.next();
+                        
+                        EntraMusic.add(new ReproductorMusica(Potencia,prestaciones, cantidadParlantes, voltaje, ClasificacionEnergetica, gama, marca, color, modelo));
+                        System.out.println("Desea agregar un nuevo Reproductor de música?"); 
+                        resp1=leer.next().charAt(0);
+            }while(resp1=='S'||resp1=='s');  
+                    System.out.println("Listado de reproductores de musica en  Stock");
+                    for(int i = 0; i < EntraMusic.size(); i++){
+                    System.out.println(i + ".- \tReproductor Modelo:" + EntraMusic.get(i).getmodelo());
+                            }  
+                    break;
+                    
+                case 3:
+                        System.out.println("Menú de Ingreso para Televisor");
+            do{
+                        System.out.println("Ingrese la tecnologia asociada (Led, Smart Tv...)");
+                        String tecnologia=leer.next();
+                        System.out.println("Ingrese la resolución (HD, 4K,3D ");
+                        String Resolucion=leer.next();
+                        System.out.println("Ingrese cantidad de pulgadas");
+                        int pulgadas =leer.nextInt();
+                        System.out.println("Ingrese voltaje");
+                        int voltaje =leer.nextInt();
+                        System.out.println("Ingrese Clasificación Energética");
+                        String ClasificacionEnergetica =leer.next();
+                        System.out.println("Ingrese Marca");
+                        String marca =leer.next();
+                        System.out.println("Ingrese Gama");
+                        String gama=leer.next();
+                        System.out.println("Ingrese color");
+                        String color =leer.next();
+                        System.out.println("Ingrese Modelo");
+                        String modelo =leer.next();
+                        
+                        Entratele.add(new Televisor( voltaje,ClasificacionEnergetica, gama, marca, color, pulgadas, Resolucion, tecnologia, modelo));
+                        System.out.println("Desea agregar un nuevo Televisor?"); 
+                        resp1=leer.next().charAt(0);
+            }while(resp1=='S'||resp1=='s'); 
+                    System.out.println("Listado de Televisores en Stock");
+                    for(int i = 0; i < Entratele.size(); i++){
+                    System.out.println(i + ".- \tTelevisor Modelo:" + Entratele.get(i).getmodelo());
+                }
+                    break;
+                        
+                
+            }
+           
+             }else{  // si la respuesta a la pregunta de ingreso al menu fue no, enlista los parámetros por defecto  
+        
+            
+      //Atributos de la Clase Lavadora
+      L1.carga=7;//Kilos
+      L1.controlDeMando="Manual";
+      L1.tipoCarga="Superior";
+      
+      //Atributos de Clase Padre Electrodomestico
+      L1.voltaje=(220);
+      L1.color="Blanco";
+      L1.gama="Blanca";
+      L1.marca="Mabe";
+      L1.ClasificacionEnergetica="A+";
+      L1.modelo="Mc123";
+      
+     
+      
+     
+      //Atributos de la Clase ReproductorMusica
+      Marshal.Potencia="2000 Watts";
+      Marshal.cantidadParlantes=4;
+      Marshal.prestaciones="bluetooth";
+      
+      //Atributos de Clase Padre Electrodoméstico
+      Marshal.ClasificacionEnergetica="A";
+      Marshal.color="Gris Plata";
+      Marshal.gama="Marron";
+      Marshal.marca="Marshal";
+      Marshal.voltaje=220;
+      Marshal.modelo="KO28";
+      
+     
+      
+      
+      
+      //Métodos Clase Televisor.
+      tele.pulgadas=60;
+      tele.tecnologia="Smart TV";
+      tele.Resolucion="HD";
+       //Atributos de Clase Padre Electrodoméstico
+      tele.ClasificacionEnergetica="B";
+      tele.color="Plata";
+      tele.gama="Gris";
+      tele.marca="LG";
+      tele.voltaje=220;
+      tele.modelo="Lo658";
+      
+      
+      //Muestra los datos "predeterminados" ingresados al Main 
+        //Métodos Clase Televisor;
+        System.out.println("===Para Televisor=== ");
+        tele.mostrarDatos();
+        System.out.println("Algunas funciones integradas son :");
+        tele.prendelatele();
+      //Métodos Clase Lavadora.
+        System.out.println("===Para Lavadora=== ");
+        L1.mostrarDatos();
+        System.out.println("Algunas funciones integradas son :");
+        L1.centrifuga();
+        L1.lava();
+        
+      //Métodos Clase ReproductorMusica
+        System.out.println("===Para Equipo de Musica=== ");
+        Marshal.mostrarDatos(); 
+                System.out.println("Algunas funciones integradas son :");
+        Marshal.subeVolumen();
+      
+              
+            }  
+ }
+    
+}
+
+package Herencia;
+
+
+public class Electrodomestico {
+protected  int voltaje;
+protected   String ClasificacionEnergetica;
+protected   String gama;
+protected String marca;
+protected String color;
+protected String modelo;
+
+   public Electrodomestico(){};
+   
+   public Electrodomestico(int voltaje,String ClasificacionEnergetica,String gama,String marca,String color,String modelo){
+   this.voltaje=220;
+   this.ClasificacionEnergetica=ClasificacionEnergetica;
+   this.gama=gama;
+   this.color=color;
+   this.marca=marca;
+   this.modelo=modelo;
+   }
+   //Setter y Getter
+   public void setvoltaje(int voltaje){
+   this.voltaje=voltaje;
+   }
+   public int getvoltaje(){
+       return this.voltaje;
+   }
+   public void setClasificacionEnergetica(String ClasificacionEnergetica){
+   this.ClasificacionEnergetica=ClasificacionEnergetica;
+   }
+   public String getClasificacionEnergetica(){
+       return this.ClasificacionEnergetica;
+   }
+   public void setgama(String gama){
+   this.gama=gama;
+   }
+   public String getgama(){
+       return this.gama;
+   }
+   
+   public void setmarca(String marca){
+   this.marca=marca;
+   }
+    public String getmarca(){
+       return this.marca;
+    }
+    public void setcolor(String color){
+   this.color=color;
+   }
+    public String getcolor(){
+       return this.color;
+    }   
+
+    public void setmodelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getmodelo() {
+        return this.modelo;
+    }
+    
+    
+ //Métodos
+   public void mostrarDatos(){
+       System.out.println("El voltaje es: "+ this.voltaje +"\nLa Clasificación Energetica es: "+ this.ClasificacionEnergetica+ "\nLa Gama es: " +this.gama+"\nLa Marca es: "+this.marca+ "\nEl color es: " +this.color + "\nEl Modelo es: " +this.modelo);
+   }
+}
+
+package Herencia;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Lavadora extends Electrodomestico{
+protected    int carga; //kilos 5,7,9
+protected    String tipoCarga; //Lateral, frontal 
+protected    String controlDeMando; //Pantalla lcd o mando manual 
+   Scanner leer=new Scanner(System.in); 
+    int  resp1;
+ArrayList <Lavadora> EntraLav=new ArrayList <>();    
+     
+    public Lavadora(){};
+    public Lavadora( int carga,String tipoCarga,String controlDeMando){
+    this.carga=carga;
+    this.tipoCarga=tipoCarga;
+    this.controlDeMando=controlDeMando;
+    
+    }
+    
+    public Lavadora( int carga,String tipoCarga,String controlDeMando,int voltaje,String ClasificacionEnergetica,String gama,String marca,String color,String modelo){
+    super(voltaje, ClasificacionEnergetica, gama, marca, color, modelo);
+    this.carga=carga;
+    this.tipoCarga=tipoCarga;
+    this.controlDeMando=controlDeMando;
+    
+    }
+    public void setcarga(int carga){
+    this.carga=carga;
+    }
+
+    public int getCarga() {
+        return carga;
+    }
+
+    public void setTipoCarga(String tipoCarga) {
+        this.tipoCarga = tipoCarga;
+    }
+
+    public String getTipoCarga() {
+        return tipoCarga;
+    }
+
+    public void setControlDeMando(String controlDeMando) {
+        this.controlDeMando = controlDeMando;
+    }
+
+    public String getControlDeMando() {
+        return controlDeMando;
+    }
+    
+     
+    
+    
+    //Métodos
+    
+    public void centrifuga(){
+        System.out.println("trrrrrr, trrrrrr, trrrrrrrr");
+    }
+    public void lava(){
+        System.out.println("Splash!, Splash!,Splash!");
+    }
+    
+}
+package Herencia;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class ReproductorMusica extends Electrodomestico {
+protected    String Potencia;
+protected    String prestaciones; //karaoke, equalizador, bandeja de cds, mp3, usb, bluetooth.
+protected    int cantidadParlantes; //2,5+1 o 7+1
+    
+ Scanner leer=new Scanner(System.in); 
+ ArrayList <ReproductorMusica> EntraMusic=new ArrayList <>();
+ int  resp1;
+    public ReproductorMusica(){};
+  
+    public ReproductorMusica (String Potencia,String prestaciones,int cantidadParlantes){
+    this.Potencia=Potencia;
+    this.prestaciones=prestaciones;
+    this.cantidadParlantes=cantidadParlantes;
+   
+    };
+    public ReproductorMusica(String Potencia,String prestaciones,int cantidadParlantes, int voltaje,String ClasificacionEnergetica,String gama,String marca,String color,String modelo){
+    
+    super(voltaje, ClasificacionEnergetica, gama, marca, color,modelo);
+    this.Potencia=Potencia;
+    this.prestaciones=prestaciones;
+    this.cantidadParlantes=cantidadParlantes;
+    
+    }
+
+    
+    public void setPotencia(String Potencia) {
+        this.Potencia = Potencia;
+    }
+
+    public String getPotencia() {
+        return Potencia;
+    }
+
+    public void setCantidadParlantes(int cantidadParlantes) {
+        this.cantidadParlantes = cantidadParlantes;
+    }
+
+    public int getCantidadParlantes() {
+        return cantidadParlantes;
+    }
+
+    public void setPrestaciones(String prestaciones) {
+        this.prestaciones = prestaciones;
+    }
+
+    public String getPrestaciones() {
+        return prestaciones;
+    }
+  }

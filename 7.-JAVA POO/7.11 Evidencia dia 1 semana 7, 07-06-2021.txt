@@ -1,0 +1,245 @@
+Evidencia Dia 1 semana 7
+
+Crear una superclase Electrodoméstico con sus respectivos atributos y métodos propios de la clase, luego a partir de esta clase crear como mínimo tres subclases
+
+public class Herencia {
+
+   
+    public static void main(String[] args) {
+    }
+    Electrodomestico E1=new Electrodomestico();
+    Lavadora L1=new Lavadora();
+ 
+    
+}
+
+package Herencia;
+
+
+public class Electrodomestico {
+private   int voltaje;
+private   String ClasificacionEnergetica;
+private   String gama;
+private String marca;
+private String color;
+
+   public Electrodomestico(){};
+   
+   public Electrodomestico(int voltaje,String ClasificacionEnergetica,String gama,String marca,String color){
+   this.voltaje=voltaje;
+   this.ClasificacionEnergetica=ClasificacionEnergetica;
+   this.gama=gama;
+   this.color=color;
+   this.marca=marca;
+   }
+   //Setter y Getter
+   public void setvoltaje(){
+   this.voltaje=voltaje;
+   }
+   public int getvoltaje(){
+       return this.voltaje;
+   }
+   public void setClasificacionEnergetica(){
+   this.ClasificacionEnergetica=ClasificacionEnergetica;
+   }
+   public String getClasificacionEnergetica(){
+       return this.ClasificacionEnergetica;
+   }
+   public void setgama(){
+   this.gama=gama;
+   }
+   public String getgama(){
+       return this.gama;
+   }
+   
+   public void setmarca(){
+   this.marca=marca;
+   }
+    public String getmarca(){
+       return this.marca;
+    }
+    public void setcolor(){
+   this.color=color;
+   }
+    public String getcolor(){
+       return this.color;
+    }   
+    
+    
+ //Métodos
+   public void mostrarDatos(){
+       System.out.println("El voltaje es "+voltaje+"La Clasificación Energética es "+ ClasificacionEnergetica+"La Gama "+gama+"La Marca es "+ marca+"El color es "+color);
+   }
+}
+
+
+package lunes7junioherencia;
+
+
+public class ReproductorMusica extends Electrodomestico {
+    int Potencia;
+    String prestaciones; //karaoke, equalizador, bandeja de cds, mp3, usb, bluetooth.
+    int cantidadParlantes; //2,5+1 o 7+1
+    
+  
+    public ReproductorMusica (int Potencia,String prestaciones,int cantidadParlantes){
+    this.Potencia=Potencia;
+    this.prestaciones=prestaciones;
+    this.cantidadParlantes=cantidadParlantes;
+   
+    }
+    public ReproductorMusica(int Potencia,String prestaciones,int cantidadParlantes, int voltaje,String ClasificacionEnergetica,String gama,String marca,String color){
+    
+    super(voltaje, ClasificacionEnergetica, gama, marca, color);
+    this.Potencia=Potencia;
+    this.prestaciones=prestaciones;
+    this.cantidadParlantes=cantidadParlantes;
+    
+    }
+
+    
+    public void setPotencia(int Potencia) {
+        this.Potencia = Potencia;
+    }
+
+    public int getPotencia() {
+        return Potencia;
+    }
+
+    public void setCantidadParlantes(int cantidadParlantes) {
+        this.cantidadParlantes = cantidadParlantes;
+    }
+
+    public int getCantidadParlantes() {
+        return cantidadParlantes;
+    }
+
+    public void setPrestaciones(String prestaciones) {
+        this.prestaciones = prestaciones;
+    }
+
+    public String getPrestaciones() {
+        return prestaciones;
+    }
+    
+    
+    //Métodos
+    
+    public void onRadio(){
+       
+       System.out.println("Prendiendo Equipo... Bienvenido");
+   } 
+   public void subeVolumen(){
+       System.out.println("Subiendo volumen PUM, PUM, PUM PUM!");
+   } 
+}
+
+
+package Herencia;
+
+
+public class Lavadora extends Electrodomestico{
+    int carga; //kilos 5,7,9
+    String tipoCarga; //Lateral, frontal 
+    String controlDeMando; //Pantalla lcd o mando manual 
+    int rpm; //revoluciones por minuto desde 900 a 1500
+    
+    public Lavadora(){}
+    public Lavadora( int carga,String tipoCarga,String controlDeMando){
+    this.carga=carga;
+    this.tipoCarga=tipoCarga;
+    this.controlDeMando=controlDeMando;
+    
+    }
+    
+    public Lavadora( int carga,String tipoCarga,String controlDeMando,int voltaje,String ClasificacionEnergetica,String gama,String marca,String color){
+    super(voltaje, ClasificacionEnergetica, gama, marca, color);
+    this.carga=carga;
+    this.tipoCarga=tipoCarga;
+    this.controlDeMando=controlDeMando;
+    
+    }
+    public void setcarga(){
+    this.carga=carga;
+    }
+
+    public int getCarga() {
+        return carga;
+    }
+
+    public void setTipoCarga(String tipoCarga) {
+        this.tipoCarga = tipoCarga;
+    }
+
+    public String getTipoCarga() {
+        return tipoCarga;
+    }
+
+    public void setControlDeMando(String controlDeMando) {
+        this.controlDeMando = controlDeMando;
+    }
+
+    public String getControlDeMando() {
+        return controlDeMando;
+    }
+    
+    
+    
+    //Métodos
+    
+    public void centrifuga(){
+        System.out.println("trrrrrr, trrrrrr, trrrrrrrr");
+    }
+    public void lava(){
+        System.out.println("Splash!, Splash!,Splash!");
+    }
+}
+
+package lunes7junioherencia;
+
+
+public class Televisor extends Electrodomestico {
+private   int pulgadas;
+private   String Resolucion;//Hd,SD, FHD.
+private    String tecnologia; //Led, Smart Tv
+    
+    public Televisor (int pulgadas,String Resolucion,String tecnologia){
+    this.pulgadas=pulgadas;
+    this.Resolucion=Resolucion;
+    this.tecnologia=tecnologia;
+    }
+    public Televisor (int voltaje,String ClasificacionEnergetica,String gama,String marca,String color,int pulgadas,String Resolucion,String tecnologia){
+    super(voltaje, ClasificacionEnergetica, gama, marca, color);   
+    this.pulgadas=pulgadas;
+    this.Resolucion=Resolucion;
+    this.tecnologia=tecnologia;
+    }
+     public void setpulgadas(){
+    this.pulgadas=pulgadas;
+    }
+
+    public int getpulgadas() {
+        return pulgadas;
+    }  
+     public void setResolucion(){
+    this.Resolucion=Resolucion;
+    }
+
+    public String getResolucion() {
+        return Resolucion;
+    }
+    
+     public void settecnologia(){
+    this.tecnologia=tecnologia;
+    }
+
+    public String gettecnologia() {
+        return tecnologia;
+    }
+    
+    //Métodos
+    public void prendelatele(){
+        System.out.println("Pantalla de Bienvenida");
+        
+    }
+}

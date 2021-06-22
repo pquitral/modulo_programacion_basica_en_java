@@ -1,0 +1,187 @@
+package javaapplication29;
+
+
+public class Abstractismos {
+
+    public static void main(String[] args) {
+        // Implementación de la clase abstracta
+        
+        Bebe B1=new Bebe();
+        B1.setNombre("Manolito");
+        B1.setEdad(8);
+        B1.setSexo("masculino");
+        B1.setNacionalidad("chilena");
+        
+        B1.comer();
+        B1.mostrarDatos();
+        B1.beber();
+        System.out.println("\n");
+        
+        Nina N1=new Nina();
+        N1.setNombre("Alejandra");
+        N1.setEdad(7);
+        N1.setSexo("femenino");
+        N1.setNacionalidad("peruana");
+       
+        N1.comer();
+        N1.mostrarDatos();
+        N1.beber();
+         System.out.println("\n");
+         
+        Hombre H1=new Hombre();
+        H1.setNombre("Antonio");
+        H1.setEdad(40);
+        H1.setSexo("masculino");
+        H1.setNacionalidad("Argentina");
+        
+        H1.mostrarDatos();
+        H1.comer();
+        H1.beber();
+    }    
+}
+
+package javaapplication29;
+
+
+public abstract class Persona {
+    
+private    int edad;
+private     String nombre;
+private     String sexo;
+private     String nacionalidad;
+    
+public   Persona (){
+   
+   }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+    
+    
+    
+   public abstract void mostrarDatos();
+   public abstract void comer();
+   public abstract void beber();
+}
+
+
+ package javaapplication29;
+
+
+public class Bebe extends Persona { 
+
+  
+    
+public Bebe (){}   
+public Bebe (int edad,String nombre,String sexo,String nacionalidad){
+      
+    
+} 
+   
+    
+    
+    @Override
+    public void mostrarDatos() {
+       System.out.println("tengo "+this.getEdad()+" meses"+" y soy de nacionalidad "+this.getNacionalidad());
+    }
+
+    @Override
+    public void comer() {
+        System.out.println("Me llamo "+this.getNombre()+" soy un bebé y como papillas.");
+    }
+
+    @Override
+    public void beber() {
+        System.out.println("yo bebo mucha leche. ");
+    }
+    
+}
+
+
+
+package javaapplication29;
+
+Evidencia dia 3 semana 7, 09-06-2021
+
+public class Nina extends Persona {
+    
+ public Nina(int edad,String nombre,String sexo,String nacionalidad){
+ }
+  
+ public Nina(){}   
+    
+   
+
+    @Override
+    public void mostrarDatos() {
+        System.out.println("tengo "+ this.getEdad()+ "años,soy de necionalidad "+this.getNacionalidad());
+    }
+
+    @Override
+    public void comer() {
+        System.out.println("Mi nombre es "+this.getNombre()+" soy una niña grande, como frutas enteras y comida de grande. ");
+    }
+
+    @Override
+    public void beber() {
+        System.out.println("Yo bebo jugos naturales, leche y de vez en cuando bebidas. ");
+    }
+    
+}
+
+
+package javaapplication29;
+
+
+public class Hombre extends Persona {
+    
+    public Hombre (int edad,String nombre,String sexo,String nacionalidad){
+    }
+    public Hombre(){}
+    
+    
+    @Override
+    public void mostrarDatos() {
+        System.out.println("Soy un especímen "+this.getSexo()+" de "+ this.getEdad()+ " años mi nombre es "+this.getNombre()+" y soy de nacionalidad "+this.getNacionalidad());
+    }
+
+    @Override
+    public void comer() {
+        System.out.println("Me gusta comer asados y me encantan las papas fritas.  ");
+    }
+
+    @Override
+    public void beber() {
+        System.out.println("Para beber prefiero la cerveza y en ocaciones un vinito añejo. ");
+    }
+    
+}
